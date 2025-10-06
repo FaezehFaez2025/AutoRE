@@ -1010,13 +1010,13 @@ def process_trex(data_type, data_folder):
 def make_hacred_data(data_types, source_path, save_path):
     for index, data_type in enumerate(data_types):
         final_save = []
-        data = [json.loads(line) for line in open(os.path.join(os.path.join(source_path, f"{data_type}.json")), 'r', encoding='utf-8')]
-        pid_name = json.load(open("../data/other_source/hacred/ori_data/rel2id.json", 'r', encoding='utf-8'))
+        data = json.load(open(os.path.join(source_path, f"{data_type}.json"), 'r', encoding='utf-8'))
+        # pid_name = json.load(open("../data/other_source/hacred/ori_data/rel2id.json", 'r', encoding='utf-8'))
         for page_id, sample in enumerate(data):
             fact_list = []
             same_fact_list = []
             relations = set()
-            sentence = sample['text']
+            sentence = sample['passage']
             for fact in sample['labels_char']:
                 head_name = list(set([h['name'] for h in sample['vertex_char'][fact['h']]]))
                 tail_name = list(set([t['name'] for t in sample['vertex_char'][fact['t']]]))
@@ -1049,8 +1049,8 @@ def make_hacred_data(data_types, source_path, save_path):
 
 if __name__ == '__main__':
     # preprocess for redocred
-    make_hacred_data(data_types=['train', 'dev', 'test'], source_path="../data/other_source/hacred/ori_data", save_path="../data/other_source/hacred")
-    fact_count(source_file="../data/other_source/hacred/test.json", save_file="../data/other_source/hacred/test_fact_count.json")
+    # make_hacred_data(data_types=['train', 'dev', 'test'], source_path="../data/other_source/hacred", save_path="../data/other_source/hacred")  # Already processed
+    # fact_count(source_file="../data/other_source/hacred/test.json", save_file="../data/other_source/hacred/test_fact_count.json")
     make_redocred_data(data_types=['train', 'dev', 'test'], source_path="../data/redocred/ori_redocred", save_path="../data/redocred")
     source_train = "../data/redocred/redocred_train.json"
     source_test = "../data/redocred/redocred_test.json"
