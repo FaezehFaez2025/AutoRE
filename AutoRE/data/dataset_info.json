@@ -90,7 +90,7 @@
     }
   },
   "relation_train": {
-    "file_name": "train/loras/relation/train.json",
+    "file_name": "train/loras_chinese/relation/train.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",
@@ -99,7 +99,7 @@
     }
   },
   "relation_test": {
-    "file_name": "train/loras/relation/test.json",
+    "file_name": "train/loras_chinese/relation/test.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",
@@ -108,7 +108,7 @@
     }
   },
   "subject_train": {
-    "file_name": "train/loras/subject/train.json",
+    "file_name": "train/loras_chinese/subject/train.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",
@@ -117,7 +117,7 @@
     }
   },
   "subject_test": {
-    "file_name": "train/loras/subject/test.json",
+    "file_name": "train/loras_chinese/subject/test.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",
@@ -126,7 +126,7 @@
     }
   },
   "fact_train": {
-    "file_name": "train/loras/fact/train.json",
+    "file_name": "train/loras_chinese/fact/train.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",
@@ -135,7 +135,7 @@
     }
   },
   "fact_test": {
-    "file_name": "train/loras/fact/test.json",
+    "file_name": "train/loras_chinese/fact/test.json",
     "columns": {
       "prompt": "instruction",
       "query": "input",

@@ -25,7 +25,7 @@ for task_name in "${!task_params[@]}"; do
 
   # 执行训练命令
 #  CUDA_VISIBLE_DEVICES=6 /workspace/xll/Anaconda3/envs/chatglm/bin/python src/train_bash.py \
-  deepspeed --num_gpus 8 --master_port=9901 src/train_bash.py \
+  deepspeed --num_gpus 1 --master_port=9901 src/train_bash.py \
     --deepspeed ds_config/stage2.json \
     --stage sft \
     --do_train \
