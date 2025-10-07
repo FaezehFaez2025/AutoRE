@@ -1,11 +1,11 @@
 #!/bin/bash
 
 # choice = [vicuna,chatglm3,mistral]
-model=vicuna
+model=mistral
 # Base model, replace with the base model corresponding to model
-#BASE_MODEL=AutoRE/checkpoints/Mistral-7B-Instruct-v0.2
+BASE_MODEL=/workspace/xll/checkpoints/Mistral-7B-Instruct-v0.2
 #BASE_MODEL=AutoRE/checkpoints/THUDM6B3
-BASE_MODEL=AutoRE/checkpoints/lmsys/vicuna-7b-v1.5
+#BASE_MODEL=AutoRE/checkpoints/lmsys/vicuna-7b-v1.5
 # Path where the QLoRA module is located
 model_path="AutoRE/ckpt/${model}/"
 
