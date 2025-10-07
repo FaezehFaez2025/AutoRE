@@ -18,19 +18,19 @@ version="D_R_H_F_desc"
 lora_test="loras_D_R_H_F_desc"
 
 # If loras_D_R_H_F_desc or lora_relation (subject, facts) is specified, then the following 3 steps need to be further set, refer to the specific steps in the ckpt folder.
-relation_step="1200"
-subject_step="5390"
-fact_step="4430"
+relation_step="relation_5e-5"
+subject_step="subject_5e-5"
+fact_step="fact_5e-5"
 
 # When --inference, the DATA_PATH setting does not work, and the script performs inference on the user's data
 # To test on the redocred dataset, remove the --inference below
 #DATA_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/data/redocred/redocred_test.json"
-DATA_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/data/other_source/hacred/test.json"
+DATA_PATH="AutoRE/data/other_source/hacred/test.json"
 #DATA_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/data/redocred/redocred_dev.json"
 
 # set the save_path to save test_result for redocred
 #EVAL_SAVE_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/result/${model}/loras/redocred_test/"
-EVAL_SAVE_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/result/${model}/loras_chinese/hacred_test/"
+EVAL_SAVE_PATH="AutoRE/result/${model}/loras/hacred_test/"
 #EVAL_SAVE_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/result/${model}/loras/redocred_dev/"
 # Test user input
 deepspeed --master_port 12347 --include localhost:0 inference.py \
