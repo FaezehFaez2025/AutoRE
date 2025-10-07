@@ -47,9 +47,9 @@ deepspeed --master_port 12347 --include localhost:0 inference.py \
   --relation_step ${relation_step} \
   --subject_step ${subject_step} \
   --fact_step ${fact_step} \
-  --save_path ${EVAL_SAVE_PATH}
+  --save_path ${EVAL_SAVE_PATH} \
+  --inference
 # | tee -a log.log，可以将结果输出，但是会导致terminal的颜色无法显示
-#  --inference \
 
 
 
