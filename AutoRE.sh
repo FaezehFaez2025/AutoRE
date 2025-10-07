@@ -15,7 +15,7 @@ version="D_R_H_F_desc"
 
 # lora_test corresponds to different relation extraction paradigms and the number of lora modules used, lora for a single, loras for 3 (the parameter volume of a single lora = the parameter volume of 3 loras)
 # lora_test choice=[lora_D_F,lora_D_RS_F,lora_D_R_F,lora_D_R_H_F,lora_D_R_H_F_desc,lora_relation,lora_subject,lora_facts,loras_D_R_H_F_desc]
-lora_test="loras_D_R_H_F_desc_chinese"
+lora_test="loras_D_R_H_F_desc"
 
 # If loras_D_R_H_F_desc or lora_relation (subject, facts) is specified, then the following 3 steps need to be further set, refer to the specific steps in the ckpt folder.
 relation_step="1200"
@@ -33,7 +33,7 @@ DATA_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/data/other_source/hacred/test.jso
 EVAL_SAVE_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/result/${model}/loras_chinese/hacred_test/"
 #EVAL_SAVE_PATH="/workspace/xll/AutoRE_GitHub/AutoRE/result/${model}/loras/redocred_dev/"
 # Test user input
-/workspace/xll/Anaconda3/envs/auto/bin/deepspeed --master_port 12347 --include localhost:5 inference.py \
+deepspeed --master_port 12347 --include localhost:0 inference.py \
   --model_name_or_path ${BASE_MODEL} \
   --adapter_name_or_path ${model_path} \
   --template ${model} \
