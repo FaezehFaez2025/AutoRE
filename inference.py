@@ -21,11 +21,11 @@ if __name__ == '__main__':
         args_to_filter = ['--relation_step', '--subject_step', '--fact_step']
         sys.argv = [arg for i, arg in enumerate(sys.argv) if all(arg != filter_arg and (i == 0 or sys.argv[i - 1] != filter_arg) for filter_arg in args_to_filter)]
         argv_index = 4
-        sys.argv[argv_index] = base + f"relation/checkpoint-{r_step}"
+        sys.argv[argv_index] = base + f"{r_step}/"
         args.r_model = ChatModel()
-        sys.argv[argv_index] = base + f"subject/checkpoint-{s_step}"
+        sys.argv[argv_index] = base + f"{s_step}/"
         args.s_model = ChatModel()
-        sys.argv[argv_index] = base + f"fact/checkpoint-{f_step}"
+        sys.argv[argv_index] = base + f"{f_step}/"
         args.f_model = ChatModel()
         if not do_inference:
             args.data = get_test_data(args)
