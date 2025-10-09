@@ -48,7 +48,7 @@ for task_name in "${!task_params[@]}"; do
     --per_device_eval_batch_size 8 \
     --gradient_accumulation_steps 4 \
     --lr_scheduler_type cosine \
-    --logging_steps 10 \
+    --logging_steps 10000 \
     --save_strategy "steps" \
     --save_steps "${params[save_steps]}" \
     --eval_steps "${params[eval_steps]}" \
