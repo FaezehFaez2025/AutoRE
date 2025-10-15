@@ -663,9 +663,11 @@ def loras_RHF_desc_for_test_from_file(args):
                 extracted_facts.extend(facts)
         
         # Create result entry
+        # Convert extracted_facts to string format with double quotes to match ground truth format
+        prediction_str = str(extracted_facts).replace("'", '"')
         result_entry = {
             "text": sentence,  # Same as 'input' field
-            "prediction": str(extracted_facts),  # Convert to string format
+            "prediction": prediction_str,  # Convert to string format with double quotes
             "ground_truth": sample['output']  # From 'output' field in JSON
         }
         results.append(result_entry)
