@@ -32,7 +32,10 @@ if __name__ == '__main__':
             loras_RHF_desc(args)
             cal_result_lora_facts(file_path=args.save_path)
         else:
-            loras_RHF_desc_for_test(args)
+            if args.read_test_data_from_file:
+                loras_RHF_desc_for_test_from_file(args)
+            else:
+                loras_RHF_desc_for_test(args)
     else:
         args.model = ChatModel()
         # Define a dictionary to map the values of lora_test to their respective functions

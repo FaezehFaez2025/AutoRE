@@ -110,6 +110,7 @@ def get_params():
     parser.add_argument("--template", type=str, required=True, help="vicuna or chatglm3 or mistral, use for llmtuner")
     parser.add_argument("--max_new_tokens", type=int, required=False)
     parser.add_argument("--inference", required=False, action="store_true", help="inference=false means test re_docred data, otherwise test your input data.")
+    parser.add_argument("--read_test_data_from_file", required=False, action="store_true", help="When set with --inference, read test data from T2G_test.json and save predictions.")
     args = parser.parse_args()
     return args
 
