@@ -23,6 +23,10 @@ bash AutoRE.sh
 # Enter the corresponding document to automatically extract
 ````
 
+Notes for running on your own data vs. the provided T2G_test.json samples:
+- To run inference on the samples in `AutoRE/inference_data/T2G_test.json`, keep the `--read_test_data_from_file` flag enabled in `AutoRE.sh`.
+- To run interactive inference (manual input) comment out the `--read_test_data_from_file` line in `AutoRE.sh`.
+
 ### 2.model training
 
 #### 1）data prepare
