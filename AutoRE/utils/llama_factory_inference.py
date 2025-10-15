@@ -612,3 +612,68 @@ def loras_RHF_desc_for_test(args):
                 facts = get_fixed_facts(ori_fact_list, sentence)
                 print(colored(f'         Extracted Facts:{facts}\n', 'blue'))
         clear()
+
+
+def loras_RHF_desc_for_test_from_file(args):
+    """
+    :param model:
+    :param tokenizer:
+    :param cuda_id:
+    :param node:
+    :param worker_num:
+    :param data_path:
+    :param save_path:
+    :param template_version:
+    :return:
+    """
+    cuda_id, node, worker_num, data_path, save_path, template_version = args.local_rank, args.node, args.worker_num, args.data_path, args.save_path, args.template_version
+    f_model, r_model, s_model = args.f_model, args.r_model, args.s_model
+    clear()
+    
+    # Load T2G_test.json file
+    test_data_path = "AutoRE/inference_data/T2G_test.json"
+    with open(test_data_path, 'r', encoding='utf-8') as f:
+        test_data = json.load(f)
+    
+    # Initialize results list
+    results = []
+    
+    # Process each sample in the test data
+    for sample in tqdm(test_data, desc="Processing samples"):
+        sentence = sample['input']  # Use 'input' field as sentence
+        extracted_facts = []
+        
+        print(f"Processing: {sentence[:100]}...")
+        
+        relations_prompt = templates[template_version]["relation_list_template"].format(sentences=sentence)
+        ori_relations_list = llama_factory_inference(r_model, relations_prompt)
+        relations = get_fixed_relation(ori_relations_list)
+        
+        for relation in relations:
+            subject_list_prompt = templates[template_version]["entity_list_template"].format(sentences=sentence, description=relations_description.get(relation), relation=relation)
+            ori_subjects = llama_factory_inference(s_model, subject_list_prompt)
+            ori_entities = list(set(ori_subjects.split("\n")))
+            entities = get_fixed_entity(ori_entities, sentence)
+            
+            for subject in entities:
+                fact_list_prompt = templates[template_version]["fact_list_template"].format(sentences=sentence, relation=relation, subject=subject,
+                                                                                            description=relations_description.get(relation))
+                ori_fact_list = llama_factory_inference(f_model, fact_list_prompt)
+                facts = get_fixed_facts(ori_fact_list, sentence)
+                extracted_facts.extend(facts)
+        
+        # Create result entry
+        result_entry = {
+            "text": sentence,  # Same as 'input' field
+            "prediction": str(extracted_facts),  # Convert to string format
+            "ground_truth": sample['output']  # From 'output' field in JSON
+        }
+        results.append(result_entry)
+    
+    # Save results to AutoRE_prediction.json
+    output_path = "AutoRE/inference_data/AutoRE_prediction.json"
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(results, f, indent=2, ensure_ascii=False)
+    
+    print(f"Results saved to {output_path}")
+    print(f"Processed {len(results)} samples")
